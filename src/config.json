@@ -1,4 +1,4 @@
 {
-    "apiUrlLocal": "http://localstorage:4000/api",
+    "apiUrl2": "http://localhost:4000/api",
     "apiUrl": "https://murmuring-ravine-01051.herokuapp.com/api"
 }

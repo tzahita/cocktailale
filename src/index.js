@@ -9,6 +9,7 @@ import 'jquery/dist/jquery';
 import 'popper.js/dist/popper';
 import 'bootstrap/dist/js/bootstrap';
 import {BrowserRouter, Route} from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
   <React.StrictMode>

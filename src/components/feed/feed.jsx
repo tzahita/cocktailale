@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import FilterPanel from '../filterPanel/filterPanel';
 import PageHeader from '../common/pageHeader/pageHeader';
+import Loader from '../common/loader/loader';
 import Card from '../card/card';
 import http from '../services/http';
 import { apiUrl } from '../../config.json';
@@ -11,11 +12,12 @@ import EmptyState from '../emptyState/emptyState';
 
 class Feed extends FilterPanel {
   state = {
-    title: 'Please login or sign up',
-    text: 'This is my awesome web page application. It is SPA based',
+    title: '',
+    text: '',
     cards: [],
     filter: false,
     searched: '',
+    loaded: false,
   };
 
   componentDidMount = async () => {
@@ -28,7 +30,7 @@ class Feed extends FilterPanel {
       title = `Hello ${user.data.name}! `;
       text = `Here some cocktails for you:`;
 
-      this.setState({ title: title, text: text });
+      this.setState({ title: title, text: text ,loaded: true});
     } catch (e) {
       if (e.response && e.response.status === 400) {
         this.setState({ errors: { email: 'Unexpected Error' } });
@@ -39,7 +41,6 @@ class Feed extends FilterPanel {
   };
 
   filterGrid =async()=> {
-    debugger
     let {filter} = this.state;
     if(filter){
       filter = false
@@ -50,6 +51,7 @@ class Feed extends FilterPanel {
     if(filter){
       const { data } = await cardsService.getFavoriteCards('fav',this.state.searched);
       this.setState({ cards: data });
+      this.setState({ loaded: true });
     }else{
       const { data } = await cardsService.getFavoriteCards('all',this.state.searched);
       if (data.length > 0) {
@@ -91,6 +93,7 @@ class Feed extends FilterPanel {
             </div>
 
             <div className="row mb-4">
+            {!this.state.loaded &&cards.length > 0 &&<Loader/>}
               {cards.length > 0 &&
                 cards.map((card) => (
                   <Link
