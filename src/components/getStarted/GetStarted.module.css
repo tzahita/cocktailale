@@ -1,0 +1,10 @@
+.Signin_bgc{
+    background-image: url("../../img/undraw_authentication_fsn5.svg");
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.8;
+    margin-right: 80px;
+
+}

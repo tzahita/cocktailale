@@ -1,0 +1,9 @@
+.BizSignup_bgc{
+    background-image: url("../../img/undraw_business_shop_qw5t.svg");
+    height: 300px;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.8;
+    margin-right: 80px;
+}
