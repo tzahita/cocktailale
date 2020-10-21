@@ -7,6 +7,8 @@ import { apiUrl } from '../../config.json';
 import { toast } from 'react-toastify';
 import userServices from '../services/userService';
 import { Redirect } from 'react-router-dom';
+import Loader from '../common/loader/loader';
+
 
 class Me extends Form {
   state = {
@@ -17,6 +19,8 @@ class Me extends Form {
       password: '',
     },
     errors: {},
+    loaded: false,
+
   };
   schema = {
     name: Joi.string().min(2).max(255).required().label('Name'),
@@ -40,9 +44,11 @@ class Me extends Form {
         this.setState({ errors: { email: 'Unexpected Error' } });
       }
     }
+    this.setState({ loaded: true });
   };
 
   doSubmit = async () => {
+    this.setState({ loaded: false });
     const currentUser = userServices.getCurrentUser();
     const data = { ...this.state.data, biz: currentUser.biz };
 
@@ -66,18 +72,25 @@ class Me extends Form {
       <div className="container">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">
-          <div className="col-12 ">
+          <div className="col-md-12 col-sm-12 ">
+          {!this.state.loaded &&<Loader/>}
             <h5>Here is your account information.</h5>
           </div>
         </div>
+        <div className="row ">
+          <div className="col-md-3"></div>
+          <div className="col-md-6">
         <form onSubmit={this.handelOnSubmit}>
           <div className="row justify-content-center p-5">
             {this.renderInput('name', 'User Name', 'text', '')}
             {this.renderInput('email', 'Email', 'text', '')}
-            {this.renderInput('password', 'Password', 'password', '')}
+            {/* {this.renderInput('password', 'Password', 'password', '')} */}
           </div>
           {this.renderButton('Update')}
         </form>
+        </div>
+          {/* <div className="col-md-4"></div> */}
+        </div>
       </div>
     );
   }

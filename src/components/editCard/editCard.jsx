@@ -5,6 +5,8 @@ import PageHeader from '../common/pageHeader/pageHeader';
 import cardService from '../services/cardService';
 import Card from '../card/card';
 import { toast } from 'react-toastify';
+import Loader from '../common/loader/loader';
+
 
 class EditCard extends Form {
   state = {
@@ -18,6 +20,7 @@ class EditCard extends Form {
         'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     },
     errors: {},
+    loaded: false,
   };
 
   schema = {
@@ -45,16 +48,19 @@ class EditCard extends Form {
       data.bizAddress = card.data.bizAddress
       data.bizPhone = card.data.bizPhone
       data.bizImage = card.data.bizImage
-
+      
       this.setState({ data: data });
     } catch (e) {
       if (e.response && e.response.status === 400) {
         this.setState({ errors: { email: 'Unexpected Error' } });
       }
     }
+    this.setState({ loaded: true });
   };
 
   doSubmit = async () => {
+    this.setState({ loaded: false });
+
     const { data } = this.state;
     if (!data.bizImage) {
       delete data.bizImage;
@@ -75,6 +81,7 @@ class EditCard extends Form {
           </div>
         </div>
         <div className="row ">
+        {!this.state.loaded &&<Loader/>}
           <div className="col-md-7 ">
             <form
               onSubmit={this.handelOnSubmit}

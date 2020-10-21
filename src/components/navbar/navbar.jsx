@@ -49,14 +49,14 @@ class Navbar extends Component {
             )}
           </ul>
           <ul className="navbar-nav ml-auto">
-            {!this.props.user && (
+            {/* {!this.props.user && (
               <React.Fragment>
                 <li className="nav-item p-2">
                   <NavLink to="/getStarted" className="nav-link">
                   Get Started
                   </NavLink>
                 </li>
-                {/* <li className="nav-item p-2">
+                <li className="nav-item p-2">
                   <NavLink to="/signup" className="nav-link">
                     Sign Up
                   </NavLink>
@@ -65,15 +65,15 @@ class Navbar extends Component {
                   <NavLink to="/biz-signup" className="nav-link">
                     Business
                   </NavLink>
-                </li> */}
+                </li>
               </React.Fragment>
-            )}
+            )} */}
 
             {this.props.user && (
               <React.Fragment>
                 <li className="nav-item p-2">
                   <NavLink to="/me" className="nav-link">
-                    {this.props.data.email}
+                    {this.props.data.name}
                   </NavLink>
                 </li>
                 <li className="nav-item p-2">

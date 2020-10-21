@@ -8,6 +8,8 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import classes from './mycards.module.css';
+import Loader from '../common/loader/loader';
+
 
 class Mycards extends Card {
   state = {
@@ -19,7 +21,8 @@ class Mycards extends Card {
       bizAddress: 'Israel',
       bizPhone: '05123456',
       bizImage: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-    }
+    },
+    loaded: false,
   };
   
   doSubmit = async (e) =>{
@@ -35,6 +38,7 @@ class Mycards extends Card {
     if (data.length > 0) {
       this.setState({ cards: data });
     }
+    this.setState({ loaded: true });
   }
 
   render() {
@@ -52,6 +56,7 @@ class Mycards extends Card {
 
         </div>
         <div className="row ">
+        {!this.state.loaded && <Loader/>}
         <Link to="/create-card" className="nav-link cardLink decor col-md-4 mt-2 " href="/">
         <AddCard card={this.state.addCard} classes="addCard" />
           {/* <Card card={this.state.addCard} classes="addCard  mt-2" /> */}

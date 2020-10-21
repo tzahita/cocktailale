@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import userServices from '../services/userService';
 import { Redirect } from 'react-router-dom';
 import classes from './Signup.module.css'
+import Loader from '../common/loader/loader';
+
 
 class Signup extends Form {
   state = {
@@ -19,6 +21,8 @@ class Signup extends Form {
       biz: false,
     },
     errors: {},
+    loaded: true,
+
   };
   schema = {
     name: Joi.string().min(2).max(255).required().label('Name'),
@@ -28,6 +32,8 @@ class Signup extends Form {
   };
 
   doSubmit = async () => {
+    this.setState({ loaded: false });
+
     const data = { ...this.state.data };
 
     try {
@@ -38,6 +44,7 @@ class Signup extends Form {
     } catch (e) {
       if (e.response && e.response.status === 400) {
         this.setState({ errors: { email: 'Email is taken' } });
+        this.setState({ loaded: true });
       }
     }
   };
@@ -55,6 +62,8 @@ class Signup extends Form {
     }
     return (
       <div>
+      {!this.state.loaded &&<Loader/>}
+
       <div className="container col-md-12">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">
@@ -68,11 +77,9 @@ class Signup extends Form {
             {this.renderInput('email', '', 'text', 'Email')}
             {this.renderInput('password', '', 'password', 'Password')}
             {this.renderCheckBox('biz', 'Are you a business?', 'checkbox', )} 
-             {/* {this.renderRadio()} */}
           </div>
           {this.renderButton('Submit')}
         </form>
-        {/* <div className={classes.Signup_bgc}></div> */}
       </div>
       </div>
     );

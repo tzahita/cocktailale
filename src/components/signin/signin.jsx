@@ -5,6 +5,7 @@ import Joi from 'joi-browser';
 import userServices from '../services/userService';
 import { Redirect } from 'react-router-dom';
 import classes  from './Signin.module.css';
+import Loader from '../common/loader/loader';
 
 class Signin extends Form {
   state = {
@@ -14,6 +15,8 @@ class Signin extends Form {
       password: '',
     },
     errors: {},
+    loaded: true,
+
   };
   schema = {
     email: Joi.string().min(6).max(255).required().email().label('Email'),
@@ -21,6 +24,8 @@ class Signin extends Form {
   };
 
   doSubmit = async () => {
+    this.setState({ loaded: false });
+
     const { email, password } = this.state.data;
     debugger
     const { location } = this.props;
@@ -35,6 +40,8 @@ class Signin extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ errors: { email: ex.response.data } });
+        this.setState({ loaded: true });
+
       }
     }
   };
@@ -45,6 +52,7 @@ class Signin extends Form {
     }
     return (
       <div >
+        {!this.state.loaded &&<Loader/>}
         <div className="container col-md-12 signin_box  ">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">

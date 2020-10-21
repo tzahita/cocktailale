@@ -1,9 +1,11 @@
 import React from 'react';
+import Classes from './addCard.module.css';
 
-const  AddCard  = ({classes}) => {
+
+const  AddCard  = () => {
     return (
       <React.Fragment>
-        <div className={classes}>
+        <div className={Classes.addCard}>
           <div className=" mb-2">
             <img src={require('../../img/plus-5-512.png')} alt="Add" />
             {/* <img src={require('../../img/plus-5-512 (1).png')} alt="Add" /> */}

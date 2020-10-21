@@ -23,6 +23,7 @@ import CreateCard from './components/createCard/createCard';
 import CardDisplay from './components/cardDisplay/cardDisplay';
 import EditCard from './components/editCard/editCard';
 import ProtectedRoute from './components/common/rotectedRout/rotectedRout';
+import { PageTransition } from '@steveeeie/react-page-transition';
 
 class App extends Component {
   state = {
@@ -37,11 +38,12 @@ class App extends Component {
   componentDidMount = async () => {
     const currentUser = userService.getCurrentUser();
     this.setState({ user: currentUser });
-    const data = { ...this.state.data, biz: false };
+    const {data} = { ...this.state, biz: false };
 
     try {
       const user = await http.get(`${apiUrl}/users/me`, currentUser);
       data.email = user.data.email;
+      data.name = user.data.name;
       this.setState({ data: data });
     } catch (e) {
       if (e.response && e.response.status === 400) {
@@ -67,9 +69,9 @@ class App extends Component {
             <ProtectedRoute path="/me" component={Me}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/getStarted" component={GetStarted}/>
-            {/* <Route path="/biz-signup" component={BizSignup}/>
+            <Route path="/biz-signup" component={BizSignup}/>
             <Route path="/signup" component={Signup}/>
-            <Route path="/signin" component={Signin}/> */}
+            <Route path="/signin" component={Signin}/>
             <ProtectedRoute path="/my-cards" biz={true} component={Mycards}/>
             <Route exact path="/" data={this.state.data} component={Home}/>
             <Route path="*" >

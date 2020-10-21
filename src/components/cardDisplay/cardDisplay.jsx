@@ -5,6 +5,8 @@ import cardService from '../services/cardService';
 import userService from '../services/userService';
 import Recommendation from '../recommendation/recommendation';
 import { Link, Redirect} from 'react-router-dom';
+import Loader from '../common/loader/loader';
+
 
 class CardDisplay extends Form {
   state = {
@@ -15,25 +17,30 @@ class CardDisplay extends Form {
       bizPhone: '',
       bizIngredients: [],
       cards:[],
-      bizImage:
-        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+      bizImage: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+      postedBy: '',
+      postedAt: '',
     },
     RcomCard: [],
     liked: false,
     errors: {},
+    loaded: false,
   };
 
   componentDidMount = async () => {
     this.getCardsData();
     this.getFavorites();
     this.getCardsRecommendData();
-  
+    this.setState({ loaded: true });
+
   };
   updatePage = async (id) => {
+    this.setState({ loaded: false });
     this.getCardsData(id);
     this.getFavorites();
     this.getCardsRecommendData(id);
-  
+    this.setState({ loaded: true });
+
   };
 
   getCardsData = async (id =this.props.match.params.id) => {
@@ -46,6 +53,8 @@ class CardDisplay extends Form {
       data.bizAddress = card.data.bizAddress;
       data.bizPhone = card.data.bizPhone;
       data.bizImage = card.data.bizImage;
+      data.postedBy = card.data.user;
+      data.postedAt =  card.data.updatedAt;
       this.setState({ data: data });
     } catch (e) {
       if (e.response && e.response.status === 400) {
@@ -92,7 +101,7 @@ class CardDisplay extends Form {
 
   setLiked(){
     let {data} =  this.state
-    const found = data.cards[0].find(element => element === this.props.match.params.id);
+    const found = data.cards[0]?.find(element => element === this.props.match.params.id);
       if(found){ 
        this.setState({liked: true})
       }else{
@@ -101,10 +110,7 @@ class CardDisplay extends Form {
   }
 
   render() {
-  //   if (this.props.location.hash==='#recs') {
-  //     this.props.location.hash =""
-  //     this.getCardsData()
-  // }
+
     const {data, RcomCard} = this.state;
 
     const mystyle = {
@@ -119,7 +125,10 @@ class CardDisplay extends Form {
     };
     return (
       <div className="container mb-4">
+        {!this.state.loaded &&<Loader/>}
         <PageHeader titleText={data.bizName} />
+        {data.postedBy&&<h5 className="mt-0 text-muted">Posted By {data.postedBy}</h5>}
+        {data.postedAt&& <h5 className="mt-0 text-muted">{ data.postedAt.toString().replace(/T/, ' ').replace(/\..+/, '') }</h5>}
         <button type="button" onClick={this.toggleChange} className="btn btn-link">
           {!this.state.liked && <i className="far fa-star"> Add to Favorite</i>}
           {this.state.liked && <i className="fas fa-star"> Remove from Favorite</i>}
@@ -127,44 +136,42 @@ class CardDisplay extends Form {
         <div style={mystyle} className=" mt-3"></div>
         <div className="row ">
           <div className="col-md-12 mt-3">
-            <form
-              onSubmit={this.handelOnSubmit}
-              onBlur={this.updateCardDisplay}
-              
-            >
+            <form>
               <div className="row">
-                <div className="col-md-3  desc" >
-                  <h3>Ingredients:</h3>
-                  <p >{ data.bizIngredients.map((item)=>(
+                <div className="col-md-3  " >
+                  <h3>Ingredients</h3>
+                  <div >{ data.bizIngredients.map((item)=>(
                     <div className="list-group">
                       <li className="list-group-item list-group-item-action">{item}</li>
                     </div>
-                  )) }</p>
+                  )) }</div>
                 </div>
-                <div className="col-md-1 desc"></div>
-                <div className="col-md-8 desc">
-                  <h3>Description:</h3>
+                <div className="col-md-1 "></div>
+                <div className="col-md-8 ">
+                  <h3>Description</h3>
                   <p >{data.bizDescription}</p>
                 </div>
-                <p  className="col-6"><b>Come visit us</b></p>
-                <p  className="col-6">{data.bizAddress}</p>
-                <p  className="col-6"><b>Call us</b></p>
-                <p  className="col-6">{data.bizPhone}</p>
+                <div className="mt-5 col-md-12 row card-footer">
+                <p  className="col-2"><b>Come visit us</b></p>
+                <p  className="col-10">{data.bizAddress}</p>
+                <p  className="col-2"><b>Call us</b></p>
+                <p  className="col-10">{data.bizPhone}</p>
+                </div>
               </div>
             </form>
           </div>
         </div>
         <div className="container mt-5">
-          <h2 className="text-center">Most Popular:</h2>
+          <h2 className="text-center">Most Popular</h2>
           <div className="row">
             <div className="col-md-12">
-              <div class="card-deck">
+              <div className="card-deck">
               {RcomCard.length > 0 &&
                 RcomCard.map((card) => (
                   <Link
                     to={`/card/display/${card._id}`}
                     className="col-md-3  mt-3 decor "
-                    href="/"
+                    href="#top"
                     onClick={()=>{this.updatePage(card._id)}}
                   >
                     <Recommendation key={card._id}  title={card.bizName} imgS={card.bizImage}></Recommendation>

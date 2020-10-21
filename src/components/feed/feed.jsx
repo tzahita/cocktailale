@@ -27,8 +27,8 @@ class Feed extends FilterPanel {
 
     try {
       const user = await http.get(`${apiUrl}/users/me`, currentUser);
-      title = `Hello ${user.data.name}! `;
-      text = `Here some cocktails for you:`;
+      title = `Hello ${user.data.name}, `;
+      text = `Here are a few cocktails for you.`;
 
       this.setState({ title: title, text: text ,loaded: true});
     } catch (e) {
@@ -38,9 +38,13 @@ class Feed extends FilterPanel {
     }
 
     this.getCards();
+    this.setState({ loaded: true });
+
   };
 
-  filterGrid =async()=> {
+  filterGrid =async()=> {    
+    this.setState({ loaded: false });
+
     let {filter} = this.state;
     if(filter){
       filter = false
@@ -51,31 +55,32 @@ class Feed extends FilterPanel {
     if(filter){
       const { data } = await cardsService.getFavoriteCards('fav',this.state.searched);
       this.setState({ cards: data });
-      this.setState({ loaded: true });
     }else{
       const { data } = await cardsService.getFavoriteCards('all',this.state.searched);
-      if (data.length > 0) {
         this.setState({ cards: data });
-      }
   }
+  this.setState({ loaded: true });
+
   }
 
   searchName = async (name) => {
     this.setState({searched: name})
-    this.getCards()
+    this.setState({loaded: false})
+    this.getCards(name)
+    this.setState({ loaded: true });
+
   }
 
-  getCards = async () =>{
+  getCards = async (name = '') =>{
     
     let {filter} = this.state;
     if(filter){
-      const { data } = await cardsService.getFavoriteCards('fav',this.state.searched);
+      const { data } = await cardsService.getFavoriteCards('fav',name);
       this.setState({ cards: data });
     }else{
-      const { data } = await cardsService.getFavoriteCards('all',this.state.searched);
-      if (data.length > 0) {
+      const { data } = await cardsService.getFavoriteCards('all',name);
         this.setState({ cards: data });
-      }
+      
   }
 }
 
@@ -91,9 +96,8 @@ class Feed extends FilterPanel {
                 <h5>{this.state.text}</h5>
               </div>
             </div>
-
             <div className="row mb-4">
-            {!this.state.loaded &&cards.length > 0 &&<Loader/>}
+            {!this.state.loaded && <Loader/>}
               {cards.length > 0 &&
                 cards.map((card) => (
                   <Link
@@ -104,9 +108,9 @@ class Feed extends FilterPanel {
                     <Card key={card._id} className="cardLink" card={card} />
                   </Link>
                 ))}
-                {cards.length === 0 && <EmptyState></EmptyState>}
-            </div>
+                { this.state.loaded && cards.length === 0 &&<EmptyState title="cocktails"></EmptyState>}
           </div>
+            </div>
           <div className="col-md-2">
             {this.renderSearchBar()}
             {this.renderFilters()}

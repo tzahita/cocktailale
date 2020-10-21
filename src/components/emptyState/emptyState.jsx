@@ -1,10 +1,10 @@
 import React from 'react';
-const EmptyState = () => {
+const EmptyState = ({title}) => {
   return (
     <div className="container text-center">
       <div className="row">
         <div className="col-md-12 mt-5">
-          <h2>There are no cards!</h2>
+          <h2>There are no {title}!</h2>
         </div>
       </div>
     </div>
