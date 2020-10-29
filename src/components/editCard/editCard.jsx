@@ -24,16 +24,16 @@ class EditCard extends Form {
   };
 
   schema = {
-    bizName: Joi.string().min(2).max(255).required(),
-    bizDescription: Joi.string().min(2).max(1024).required(),
-    bizAddress: Joi.string().min(2).max(400).required(),
-    bizIngredients: Joi.string().min(2).max(255).required(),
+    bizName: Joi.string().min(2).max(255).required().label('Name'),
+    bizDescription: Joi.string().min(2).max(1024).required().label('Description'),
+    bizAddress: Joi.string().min(2).max(400).required().label('Address'),
+    bizIngredients: Joi.string().min(2).max(255).required().label('Ingredients'),
     bizPhone: Joi.string()
       .min(9)
       .max(10)
       .required()
-      .regex(/^0[2-9]\d{7,8}$/),
-    bizImage: Joi.string().min(11).max(1024).uri().allow(''),
+      .regex(/^0[2-9]\d{7,8}$/).label('Phone'),
+    bizImage: Joi.string().min(11).max(1024).uri().allow('').label('Image'),
   };
 
   componentDidMount = async () => {

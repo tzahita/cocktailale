@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
 :root {
-  /* --backg: #FAFBFA; */
-  --backg: #262a2b;
+  --backg: #FAFBFA;
+  /* --backg: #262a2b; */
   --nav: #E35864;
   --btn: #5C4C75;
   --nav3: #443F38;
@@ -24,7 +24,10 @@ h1,h2,h3,h4,h5{
   color:var(--btn) !important;
   
 }
-
+/* 
+footer{
+  background-color: var(--backg) !important;
+} */
 
 .decor {
   text-decoration: none !important;
@@ -76,6 +79,7 @@ main {
     0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   border: 0cm !important;
   background-color: var(--backg);
+  background-color: #FAFBFA;
 }
 .card h3{
   font-size: 20px !important;
