@@ -17,14 +17,14 @@ class Card extends Component {
               />
             <div className="card-body row">
               <h3 className="card-title  d-inline-block text-truncate col-md-12"> {card.bizName}</h3>
-              <div className=" borderd pt-2 col-md-12">
+              <div className=" borderd card_desc pt-2 col-md-12">
                 <h5>Description: </h5>
                 <div className=" pt-2 d-inline-block text-truncate  col-md-12"  style={{width: "100%"}}> {card.bizDescription}</div>
               </div>
-              <div className=" col-md-6 mt-3"><h5>Tel: </h5>
+              <div className=" col-md-6 mt-3 card_tel"><h5>Tel: </h5>
               {card.bizPhone} </div>
               
-              <div  className=" col-md-6 mt-3 d-inline-block text-truncate"><h5>Address: </h5>
+              <div  className=" col-md-6 mt-3 d-inline-block text-truncate card_address"><h5>Address: </h5>
               {card.bizAddress}</div>  
                 {edit && actions}
             </div>

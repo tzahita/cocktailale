@@ -13,9 +13,9 @@ class FilterPanel extends Form {
     return (
       <React.Fragment>
         <div className="col-md-12 mt-5">
-          <div className=" ">
+          <div className="filters_root">
             <article className="card-group-item">
-              <header className="card-header">
+              <header className="card-header filters_header">
                 <h6 className="title">Filters </h6>
               </header>
               <div className="filter-content">
