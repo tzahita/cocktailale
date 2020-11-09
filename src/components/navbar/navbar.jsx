@@ -11,7 +11,6 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-md navbar-dark bg shadow">
         <Link to="/" className="navbar-brand p-2">
        
-        {/* <p className=" align-bottom m-0">CoCkTaIl<img className=" align-top" src={require('../img/cocktail-512-logo.png')} width="30" height="30" alt="logo"></img>LaLe</p> */}
         <p className=" align-bottom m-0">CocktaiLale</p>
         </Link>
         <button
@@ -33,41 +32,26 @@ class Navbar extends Component {
                 About
               </NavLink>
             </li>
-            {this.props.user && this.props.user.biz && (
+            {this.props.user && this.props.user.biz && !this.props.user.ClAdmin &&(
               <React.Fragment>
                 <li className="nav-item  p-2">
                   <NavLink to="/my-cards" className="nav-link" href="/">
                     My Cocktails
                   </NavLink>
                 </li>
-                {/* <li className="nav-item  p-2">
-                  <NavLink to="/create-card" className="nav-link" href="/">
-                    Create Card
+              </React.Fragment>
+            )}
+            {this.props.user && this.props.user.biz && this.props.user.ClAdmin &&(
+              <React.Fragment>
+                <li className="nav-item  p-2">
+                  <NavLink to="/manage/" className="nav-link" href="/">
+                    Manage
                   </NavLink>
-                </li> */}
+                </li>
               </React.Fragment>
             )}
           </ul>
           <ul className="navbar-nav ml-auto">
-            {/* {!this.props.user && (
-              <React.Fragment>
-                <li className="nav-item p-2">
-                  <NavLink to="/getStarted" className="nav-link">
-                  Get Started
-                  </NavLink>
-                </li>
-                <li className="nav-item p-2">
-                  <NavLink to="/signup" className="nav-link">
-                    Sign Up
-                  </NavLink>
-                </li>
-                <li className="nav-item p-2">
-                  <NavLink to="/biz-signup" className="nav-link">
-                    Business
-                  </NavLink>
-                </li>
-              </React.Fragment>
-            )} */}
 
             {this.props.user && (
               <React.Fragment>

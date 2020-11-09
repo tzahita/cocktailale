@@ -29,6 +29,10 @@ export function getMyCards(card) {
  return httpService.get(`${apiUrl}/cards/my-cards`, card);
 }
 
+export function getPendingCards(card) {
+ return httpService.get(`${apiUrl}/cards/pending-cards`, card);
+}
+
 export function getAllCards() {
  return httpService.get(`${apiUrl}/cards/all`);
 }
@@ -52,5 +56,5 @@ export default {
   editCard,
   getFavoriteCards,  
   getCardsRecommend,
-
+  getPendingCards,
 };

@@ -74,7 +74,7 @@ class Me extends Form {
         <div className="row">
           <div className="col-md-12 col-sm-12 ">
           {!this.state.loaded &&<Loader/>}
-            <h5>Here is your account information.</h5>
+            <h5 className="secHeader">Here is your account information.</h5>
           </div>
         </div>
         <div className="row ">
@@ -84,7 +84,7 @@ class Me extends Form {
           <div className="row justify-content-center p-5">
             {this.renderInput('name', 'User Name', 'text', '')}
             {this.renderInput('email', 'Email', 'text', '')}
-            {/* {this.renderInput('password', 'Password', 'password', '')} */}
+            {this.renderInput('password', 'Password', 'password', '')}
           </div>
           {this.renderButton('Update')}
         </form>

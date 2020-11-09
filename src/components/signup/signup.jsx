@@ -7,9 +7,8 @@ import { apiUrl } from '../../config.json';
 import { toast } from 'react-toastify';
 import userServices from '../services/userService';
 import { Redirect } from 'react-router-dom';
-import classes from './Signup.module.css'
+import classes from './Signup.module.css';
 import Loader from '../common/loader/loader';
-
 
 class Signup extends Form {
   state = {
@@ -19,16 +18,17 @@ class Signup extends Form {
       email: '',
       password: '',
       biz: false,
+      ClAdmin: false,
     },
     errors: {},
     loaded: true,
-
   };
   schema = {
     name: Joi.string().min(2).max(255).required().label('Name'),
     email: Joi.string().min(6).max(255).required().email().label('Email'),
     password: Joi.string().min(6).max(1024).required().label('Password'),
     biz: Joi.boolean().label('Biz'),
+    ClAdmin: Joi.boolean().label('Admin'),
   };
 
   doSubmit = async () => {
@@ -62,25 +62,25 @@ class Signup extends Form {
     }
     return (
       <div>
-      {!this.state.loaded &&<Loader/>}
+        {!this.state.loaded && <Loader />}
 
-      <div className="container col-md-12">
-        <PageHeader titleText={this.state.title}></PageHeader>
-        <div className="row">
-          <div className="col-12 ">
-            <h5>You can open a new account! </h5>
+        <div className="container col-md-12">
+          <PageHeader titleText={this.state.title}></PageHeader>
+          <div className="row">
+            <div className="col-12 ">
+              <h5 className="secHeader">You can open a new account! </h5>
+            </div>
           </div>
+          <form onSubmit={this.handelOnSubmit}>
+            <div className="row justify-content-center">
+              {this.renderInput('name', '', 'text', 'User Name')}
+              {this.renderInput('email', '', 'text', 'Email')}
+              {this.renderInput('password', '', 'password', 'Password')}
+              {this.renderCheckBox('biz', 'Are you a business?', 'checkbox')}
+            </div>
+            {this.renderButton('Submit')}
+          </form>
         </div>
-        <form onSubmit={this.handelOnSubmit}>
-          <div className="row justify-content-center">
-            {this.renderInput('name', '', 'text', 'User Name')}
-            {this.renderInput('email', '', 'text', 'Email')}
-            {this.renderInput('password', '', 'password', 'Password')}
-            {this.renderCheckBox('biz', 'Are you a business?', 'checkbox', )} 
-          </div>
-          {this.renderButton('Submit')}
-        </form>
-      </div>
       </div>
     );
   }

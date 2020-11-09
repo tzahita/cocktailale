@@ -41,6 +41,7 @@ export function Routes() {
             <Route path="/about" component={About}/>
             <ProtectedRoute path="/feed" component={Feed}/>
             <ProtectedRoute path="/create-card" biz={true} component={CreateCard}/>
+            <ProtectedRoute path="/manage-cards" ClAdmin={true} component={CreateCard}/>
             <ProtectedRoute path="/edit-card/:id" biz={true} component={EditCard}/>
             <ProtectedRoute exact path="/card/display/:id" component={CardDisplay}/>
             <ProtectedRoute path="/me" component={Me}/>

@@ -1,22 +1,26 @@
-.addCard{
-    height: 500px;
-    width: 100%;
-    overflow: hidden;
-    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
-      0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-    border: 0cm !important;
-    background-color: var(--border);
-    z-index: 1000;
-  }
-  
-  .addCard img{
-    height: 200px !important;
-    width: 200px;
-    margin-left: 21%;
-    margin-top: 43%;
-    /* position: relative;
-    top: 50%;
-    left: 50%; */
-    /* margin-top: -100px;
-    margin-left: -100px, */
-  }
+.addCard {
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  border: 0cm !important;
+  background-image: url('../../img/cardBGC.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1000;
+}
+
+.addCardOverlay{
+  height: 500px;
+  width: 100%;
+  background-color: rgba(27, 27, 27, 0.911);
+  z-index: 999;
+}
+
+.addCard img {
+  height: 200px !important;
+  width: 200px;
+  margin-left: 21%;
+  margin-top: 43%;
+}

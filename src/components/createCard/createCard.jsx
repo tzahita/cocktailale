@@ -48,10 +48,10 @@ class CreateCard extends Form {
     const data = this.state.data;
     return (
       <div className="container mb-4">
-        <PageHeader titleText="Business Registration Form" />
+        <PageHeader titleText="New Cocktails Form" />
         <div className="row">
           <div className="col-12">
-            <h5>Open business card</h5>
+            <h5>New posts will be published after admins approval.</h5>
           </div>
         </div>
         <div className="row ">
@@ -62,12 +62,12 @@ class CreateCard extends Form {
               className="pb-5"
             >
               <div className="row justify-content-center">
-                {this.renderInput('bizName', 'Business Name')}
+                {this.renderInput('bizName', 'Cocktail Name')}
                 {this.renderInput('bizIngredients', 'Ingredients Description')}
                 {this.renderInput('bizDescription', 'Description')}
                 {this.renderInput('bizAddress', 'Business Address')}
                 {this.renderInput('bizPhone', 'Business Phone')}
-                {this.renderInput('bizImage', 'Business Image')}
+                {this.renderInput('bizImage', 'Image URL')}
               </div>
               {this.renderButton('Create Card')}
             </form>

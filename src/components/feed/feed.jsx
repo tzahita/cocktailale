@@ -22,15 +22,15 @@ class Feed extends FilterPanel {
 
   componentDidMount = async () => {
     const currentUser = userService.getCurrentUser();
-    let {title} = this.state;
-    let {text} = this.state;
+    let { title } = this.state;
+    let { text } = this.state;
 
     try {
       const user = await http.get(`${apiUrl}/users/me`, currentUser);
       title = `Hello ${user.data.name}, `;
       text = `Here are a few cocktails for you.`;
 
-      this.setState({ title: title, text: text ,loaded: true});
+      this.setState({ title: title, text: text, loaded: true });
     } catch (e) {
       if (e.response && e.response.status === 400) {
         this.setState({ errors: { email: 'Unexpected Error' } });
@@ -39,50 +39,45 @@ class Feed extends FilterPanel {
 
     this.getCards();
     this.setState({ loaded: true });
-
   };
 
-  filterGrid =async()=> {    
+  filterGrid = async () => {
     this.setState({ loaded: false });
 
-    let {filter} = this.state;
-    if(filter){
-      filter = false
-    }else{
-      filter = true
+    let { filter } = this.state;
+    if (filter) {
+      filter = false;
+    } else {
+      filter = true;
     }
-    this.setState({filter: filter})
-    if(filter){
-      const { data } = await cardsService.getFavoriteCards('fav',this.state.searched);
+    this.setState({ filter: filter });
+    if (filter) {
+      const { data } = await cardsService.getFavoriteCards('fav', this.state.searched);
       this.setState({ cards: data });
-    }else{
-      const { data } = await cardsService.getFavoriteCards('all',this.state.searched);
-        this.setState({ cards: data });
-  }
-  this.setState({ loaded: true });
-
-  }
+    } else {
+      const { data } = await cardsService.getFavoriteCards('all', this.state.searched);
+      this.setState({ cards: data });
+    }
+    this.setState({ loaded: true });
+  };
 
   searchName = async (name) => {
-    this.setState({searched: name})
-    this.setState({loaded: false})
-    this.getCards(name)
+    this.setState({ searched: name });
+    this.setState({ loaded: false });
+    this.getCards(name);
     this.setState({ loaded: true });
+  };
 
-  }
-
-  getCards = async (name = '') =>{
-    
-    let {filter} = this.state;
-    if(filter){
-      const { data } = await cardsService.getFavoriteCards('fav',name);
+  getCards = async (name = '') => {
+    let { filter } = this.state;
+    if (filter) {
+      const { data } = await cardsService.getFavoriteCards('fav', name);
       this.setState({ cards: data });
-    }else{
-      const { data } = await cardsService.getFavoriteCards('all',name);
-        this.setState({ cards: data });
-      
-  }
-}
+    } else {
+      const { data } = await cardsService.getFavoriteCards('all', name);
+      this.setState({ cards: data });
+    }
+  };
 
   render() {
     const { cards } = this.state;
@@ -97,21 +92,17 @@ class Feed extends FilterPanel {
               </div>
             </div>
             <div className="row mb-4">
-            {!this.state.loaded && <Loader/>}
+              {!this.state.loaded && <Loader />}
               {cards.length > 0 &&
                 cards.map((card) => (
-                  <Link
-                    to={`/card/display/${card._id}`}
-                    className="col-md-8 col-lg-4 mt-3 decor "
-                    href="/"
-                  >
+                  <Link to={`/card/display/${card._id}`} className="col-md-8 col-lg-4 mt-3 decor " href="/">
                     <Card key={card._id} className="cardLink" card={card} />
                   </Link>
                 ))}
-                { this.state.loaded && cards.length === 0 &&<EmptyState title="cocktails"></EmptyState>}
-          </div>
+              {this.state.loaded && cards.length === 0 && <EmptyState title="cocktails"></EmptyState>}
             </div>
-          <div className="col-md-2">
+          </div>
+          <div className="col-md-2 mr-4 rounded">
             {this.renderSearchBar()}
             {this.renderFilters()}
           </div>

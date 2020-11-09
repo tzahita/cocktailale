@@ -1,4 +1,8 @@
 import React from 'react';
+
+// Recommendation score are based on the users reaction for cards. 
+// Adding and removing card from favorite will update the recommendation score
+
 const Recommendation = ({ title = 'title', imgS = '' }) => {
   return (
     <div className="cardLink">

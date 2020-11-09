@@ -34,9 +34,6 @@ const BackgroundVideo = () => {
                   Get Started
                 </button>
               </NavLink>
-              {/* <NavLink to={'/signin'} className=" col-md-12" href="/"><button type="button" className="btn btn-outline-dark pr-5 pl-5">Sign in</button></NavLink> */}
-              {/* <NavLink to={'/signup'} className=" col-md-6" href="/"><button type="button" className="btn btn-outline-dark pr-5 pl-5">Sign up</button></NavLink> */}
-              {/* <NavLink to={'/biz-signup'} className=" col-md-5" href="/"><button type="button" className="btn btn-outline-dark pr-5 pl-5">Business</button></NavLink> */}
             </div>
           </div>
         </div>

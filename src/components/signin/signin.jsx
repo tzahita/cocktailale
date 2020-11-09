@@ -27,7 +27,7 @@ class Signin extends Form {
     this.setState({ loaded: false });
 
     const { email, password } = this.state.data;
-    debugger
+
     const { location } = this.props;
     try {
       await userServices.login(email, password);

@@ -63,15 +63,15 @@ class Mycards extends Card {
         </Link>
           {cards.length > 0 &&
             cards.map((card) => (
-
-                <Card
-                  Key={card._id}
-                  className="cardLink col-md-4  mt-3 decor"
-                  card={card}
-                  edit={true}
-                  link={`/edit-card/${card._id}`}
-                  actions = {
-                  <div className=" mt-3 col-md-12 row">
+              <Card
+              Key={card._id}
+              className="cardLink col-md-4  mt-3 decor"
+              card={card}
+              edit={true}
+              link={`/edit-card/${card._id}`}
+              actions = {
+                <div className=" mt-3 col-md-12 row">
+                {console.log(card)}
                     <div className=" col-md-12 row">
                       <span className=" col-md-2"></span>
                       <Link to={`/edit-card/${card._id}`} className="col-md-4 text-center" href="/">
@@ -81,6 +81,8 @@ class Mycards extends Card {
                       <i className="  text-center col-md-4 fas fa-trash-alt deleteIcon" id={card._id} onClick={this.doSubmit}></i>
                     </div>
                   </div>}
+                  status={card.isApproved}
+                  deleted= {card.isDeleted}
                 />
  
             ))}

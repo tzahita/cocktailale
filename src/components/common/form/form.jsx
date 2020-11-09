@@ -4,6 +4,7 @@ import SearchBar from '../input/searchBar';
 import CheckBox from '../input/checkBox';
 import Joi, { errors } from 'joi-browser';
 
+
 class Form extends Component {
   state = {
     data: {
@@ -28,6 +29,7 @@ class Form extends Component {
   };
 
   handelOnSubmit = (e) => {
+    
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });

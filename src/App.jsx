@@ -24,6 +24,7 @@ import CardDisplay from './components/cardDisplay/cardDisplay';
 import EditCard from './components/editCard/editCard';
 import ProtectedRoute from './components/common/rotectedRout/rotectedRout';
 import { PageTransition } from '@steveeeie/react-page-transition';
+import Manage from './components/manage/manage';
 
 class App extends Component {
   state = {
@@ -44,6 +45,7 @@ class App extends Component {
       const user = await http.get(`${apiUrl}/users/me`, currentUser);
       data.email = user.data.email;
       data.name = user.data.name;
+      data.ClAdmin = user.data.ClAdmin;
       this.setState({ data: data });
     } catch (e) {
       if (e.response && e.response.status === 400) {
@@ -63,7 +65,8 @@ class App extends Component {
           <Switch>
             <Route path="/about" component={About}/>
             <ProtectedRoute path="/feed" component={Feed}/>
-            <ProtectedRoute path="/create-card" biz={true} component={CreateCard}/>
+            <ProtectedRoute path="/create-card" biz={true}  component={CreateCard}/>
+            <ProtectedRoute path="/manage/" biz={true} user={this.state.user} ClAdmin={true} component={Manage}/>
             <ProtectedRoute path="/edit-card/:id" biz={true} component={EditCard}/>
             <ProtectedRoute exact path="/card/display/:id" component={CardDisplay}/>
             <ProtectedRoute path="/me" component={Me}/>
@@ -74,9 +77,9 @@ class App extends Component {
             <Route path="/signin" component={Signin}/>
             <ProtectedRoute path="/my-cards" biz={true} component={Mycards}/>
             <Route exact path="/" data={this.state.data} component={Home}/>
-            <Route path="*" >
+            {/* <Route path="*" >
               <Redirect to="/" />
-            </Route>
+            </Route> */}
           </Switch>
         </main>
         <footer>
