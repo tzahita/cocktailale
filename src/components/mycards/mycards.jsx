@@ -47,38 +47,38 @@ class Mycards extends Card {
       return <Redirect to="/" />;
     }
     return (
-      <div className="container mb-4">
+      <div className="container mb-4 animate__animated animate__fadeIn ">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">
           <div className="col-12">
-            <p>This is my cocktails</p>
+            <h5>This is my cocktails</h5>
           </div>
 
         </div>
         <div className="row ">
         {!this.state.loaded && <Loader/>}
-        <Link to="/create-card" className="nav-link cardLink decor col-md-4 mt-2 " href="/">
-        <AddCard card={this.state.addCard} classes="addCard" />
+        <Link to="/create-card" className="nav-link cardLink decor col-md-3 mt-2 " href="/">
+        <AddCard card={this.state.addCard} classes="addCard animate__animated animate__fadeIn" />
           {/* <Card card={this.state.addCard} classes="addCard  mt-2" /> */}
         </Link>
           {cards.length > 0 &&
             cards.map((card) => (
               <Card
               Key={card._id}
-              className="cardLink col-md-4  mt-3 decor"
+              className="cardLink col-md-3  mt-3 decor animate__animated animate__fadeIn"
               card={card}
               edit={true}
               link={`/edit-card/${card._id}`}
               actions = {
-                <div className=" mt-3 col-md-12 row">
+                <div className=" mt-3 pb-1 col-md-12 row">
                 {console.log(card)}
-                    <div className=" col-md-12 row">
-                      <span className=" col-md-2"></span>
-                      <Link to={`/edit-card/${card._id}`} className="col-md-4 text-center" href="/">
+                    <div className=" col-md-12 row ">
+                      <span className=" col-md-3"></span>
+                      <Link to={`/edit-card/${card._id}`} className="col-md-3 text-center animate__animated animate__fadeIn " href="/">
                         <i className="  fas fa-edit editorIcon "></i>
                       </Link>
                       <span className=" col-md-1"></span>
-                      <i className="  text-center col-md-4 fas fa-trash-alt deleteIcon" id={card._id} onClick={this.doSubmit}></i>
+                      <i className="  text-center col-md-3 fas fa-trash-alt deleteIcon" id={card._id} onClick={this.doSubmit}></i>
                     </div>
                   </div>}
                   status={card.isApproved}

@@ -69,7 +69,7 @@ class Me extends Form {
       return <Redirect to="/" />;
     }
     return (
-      <div className="container">
+      <div className="container animate__animated animate__fadeIn">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">
           <div className="col-md-12 col-sm-12 ">

@@ -53,7 +53,7 @@ class Signin extends Form {
     return (
       <div >
         {!this.state.loaded &&<Loader/>}
-        <div className="container col-md-12 signin_box  ">
+        <div className="container col-md-12 signin_box animate__animated animate__fadeIn animate__fadeInLeft ">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">
           <div className="col-12 ">

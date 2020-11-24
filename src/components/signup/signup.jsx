@@ -64,24 +64,24 @@ class Signup extends Form {
       <div>
         {!this.state.loaded && <Loader />}
 
-        <div className="container col-md-12">
-          <PageHeader titleText={this.state.title}></PageHeader>
-          <div className="row">
-            <div className="col-12 ">
-              <h5 className="secHeader">You can open a new account! </h5>
+        <div className="container col-md-12 animate__animated animate__fadeIn animate__fadeInRight">
+            <PageHeader titleText={this.state.title}></PageHeader>
+            <div className="row">
+              <div className="col-12 ">
+                <h5 className="secHeader">You can open a new account! </h5>
+              </div>
             </div>
+            <form onSubmit={this.handelOnSubmit}>
+              <div className="row justify-content-center">
+                {this.renderInput('name', '', 'text', 'User Name')}
+                {this.renderInput('email', '', 'text', 'Email')}
+                {this.renderInput('password', '', 'password', 'Password')}
+                {this.renderCheckBox('biz', 'Are you a business?', 'checkbox')}
+              </div>
+              {this.renderButton('Submit')}
+            </form>
           </div>
-          <form onSubmit={this.handelOnSubmit}>
-            <div className="row justify-content-center">
-              {this.renderInput('name', '', 'text', 'User Name')}
-              {this.renderInput('email', '', 'text', 'Email')}
-              {this.renderInput('password', '', 'password', 'Password')}
-              {this.renderCheckBox('biz', 'Are you a business?', 'checkbox')}
-            </div>
-            {this.renderButton('Submit')}
-          </form>
         </div>
-      </div>
     );
   }
 }

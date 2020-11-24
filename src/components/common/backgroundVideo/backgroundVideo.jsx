@@ -22,7 +22,7 @@ const BackgroundVideo = () => {
 
           <div className={classes.Content}>
             <div className={classes.SubContent}>
-              <h1 className="col-md-12" className={classes.title}>
+              <h1 className="col-md-12 " className={classes.title}>
                 CocktaiLale
               </h1>
               <p className="col-md-12">Learn how to make spical cocktails!</p>
@@ -31,7 +31,7 @@ const BackgroundVideo = () => {
                   type="button"
                   className="btn btn-outline-dark pr-5 pl-5"
                 >
-                  Get Started
+                  Start Drinking
                 </button>
               </NavLink>
             </div>

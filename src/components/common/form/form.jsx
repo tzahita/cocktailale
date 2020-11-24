@@ -3,6 +3,7 @@ import Input from '../input/input';
 import SearchBar from '../input/searchBar';
 import CheckBox from '../input/checkBox';
 import Joi, { errors } from 'joi-browser';
+import Textarea from '../input/textArea';
 
 
 class Form extends Component {
@@ -85,6 +86,21 @@ class Form extends Component {
         placeholder={placeholder}
         {...rest}
       ></Input>
+    );
+  }
+  renderTextarea(name, label, type = 'text', placeholder = '', ...rest) {
+    const { data, errors } = this.state;
+    return (
+      <Textarea
+        name={name}
+        value={data[name]}
+        label={label}
+        type={type}
+        onChange={this.handelChange}
+        error={errors[name]}
+        placeholder={placeholder}
+        {...rest}
+      ></Textarea>
     );
   }
   renderCheckBox(name, label, type = 'text', placeholder = '', ...rest) {

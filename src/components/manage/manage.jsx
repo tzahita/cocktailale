@@ -29,7 +29,7 @@ class Manage extends Card {
       return <Redirect to="/" />;
     }
     return (
-      <div className="row">
+      <div className="row animate__animated animate__fadeIn">
         <div id="mySidenav" className="sidenav col-md-2">
           <NavLink to="users" onClick={this.handelClickSign} className="nav-link">
             Users

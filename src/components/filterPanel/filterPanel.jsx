@@ -12,7 +12,7 @@ class FilterPanel extends Form {
   renderFilters() {
     return (
       <React.Fragment>
-        <div className="col-md-12 mt-5 p-0 list-group-item list-group-item-action">
+        <div className="col-md-12 mt-5 p-0 list-group-item list-group-item-action animate__animated animate__fadeIn">
           <div className="filters_root ">
             <article className="card-group-item">
               <header className="card-header filters_header">

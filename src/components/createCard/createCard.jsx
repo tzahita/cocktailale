@@ -39,6 +39,7 @@ class CreateCard extends Form {
     if (!data.bizImage) {
       delete data.bizImage;
     }
+    // data.bizDescription=data.bizDescription.replace(/\r?\n/g,'<br/>')
     await cardService.createCard(data);
     toast('A new card is opened');
     this.props.history.replace('/my-cards');
@@ -47,7 +48,7 @@ class CreateCard extends Form {
   render() {
     const data = this.state.data;
     return (
-      <div className="container mb-4">
+      <div className="container mb-4 animate__animated animate__fadeIn ">
         <PageHeader titleText="New Cocktails Form" />
         <div className="row">
           <div className="col-12">
@@ -64,7 +65,7 @@ class CreateCard extends Form {
               <div className="row justify-content-center">
                 {this.renderInput('bizName', 'Cocktail Name')}
                 {this.renderInput('bizIngredients', 'Ingredients Description')}
-                {this.renderInput('bizDescription', 'Description')}
+                {this.renderTextarea('bizDescription', 'Description')}
                 {this.renderInput('bizAddress', 'Business Address')}
                 {this.renderInput('bizPhone', 'Business Phone')}
                 {this.renderInput('bizImage', 'Image URL')}
@@ -76,7 +77,7 @@ class CreateCard extends Form {
             {
                 <Card
                   Key={data._id}
-                  className="col-md-10 "
+                  className="col-md-10 animate__animated animate__fadeIn "
                   card={data}
                 />
               }

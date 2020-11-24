@@ -1,9 +1,11 @@
 .Signup_bgc{
-    background-image: url("../../img/undraw_subscriptions_1xdv.svg");
-    height: 300px;
-    background-position: right;
-    background-repeat: no-repeat;
-    background-size: contain;
-    opacity: 0.8;
-    margin-right: 80px;
+    box-sizing: border-box;
+   background-color: #fff;
+   padding-right: 80px;
+   padding-left: 80px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   width: 400px;
+   opacity: 1;
+   border-radius: 30px;
 }

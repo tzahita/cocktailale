@@ -37,6 +37,7 @@ class App extends Component {
 
 
   componentDidMount = async () => {
+    document.documentElement.style.setProperty('--animate-duration', '1s');
     const currentUser = userService.getCurrentUser();
     this.setState({ user: currentUser });
     const {data} = { ...this.state, biz: false };

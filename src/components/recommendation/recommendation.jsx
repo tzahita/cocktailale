@@ -5,7 +5,7 @@ import React from 'react';
 
 const Recommendation = ({ title = 'title', imgS = '' }) => {
   return (
-    <div className="cardLink">
+    <div className="cardLink  animate__animated animate__fadeIn">
       <h4 className="card-title "> {title}</h4>
 
       <div

@@ -1,10 +1,9 @@
-.Signin_bgc{
-    background-image: url("../../img/undraw_authentication_fsn5.svg");
-    height: 300px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    opacity: 0.8;
-    margin-right: 80px;
-
+.Signin_bgc {
+  background-image: url('../../img/Screen\ Shot\ 2020-11-12\ at\ 19.35.48.png');
+  /* height: 100hv; */
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 1;
+  margin-right: 80px;
 }

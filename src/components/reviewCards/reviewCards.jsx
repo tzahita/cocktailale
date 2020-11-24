@@ -18,13 +18,10 @@ class ReviewCards extends Card {
       bizAddress: '',
       bizPhone: '',
       bizIngredients: '',
-      bizImage:
-        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+      bizImage: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     },
     loaded: false,
   };
-
- 
 
   async componentDidMount() {
     const { data } = await cardsService.getPendingCards();
@@ -40,23 +37,23 @@ class ReviewCards extends Card {
       return <Redirect to="/" />;
     }
     return (
-      <div className="container mb-4">
+      <div className="container mb-4 animate__animated animate__fadeIn">
         <PageHeader titleText={this.state.title}></PageHeader>
         <div className="row">
           <div className="col-12">
-            <p>Waiting for review.</p>
+            <h5>Waiting for review.</h5>
           </div>
         </div>
         <div className="row mb-4">
-              {!this.state.loaded && <Loader />}
-              {cards.length > 0 &&
-                cards.map((card) => (
-                  <Link to={`/card/display/${card._id}`} className="col-md-8 col-lg-4 mt-3 decor " href="/">
-                    <Card key={card._id} className="cardLink" status={card.isApproved} card={card} />
-                  </Link>
-                ))}
-              {this.state.loaded && cards.length === 0 && <EmptyState title="cocktails"></EmptyState>}
-            </div>
+          {!this.state.loaded && <Loader />}
+          {cards.length > 0 &&
+            cards.map((card) => (
+              <Link to={`/card/display/${card._id}`} className="col-md-8 col-lg-4 mt-3 decor " href="/">
+                <Card key={card._id} className="cardLink animate__animated animate__fadeIn" status={card.isApproved} card={card} />
+              </Link>
+            ))}
+          {this.state.loaded && cards.length === 0 && <EmptyState title="cocktails"></EmptyState>}
+        </div>
       </div>
     );
   }

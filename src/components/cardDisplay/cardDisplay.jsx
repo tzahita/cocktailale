@@ -23,7 +23,7 @@ class CardDisplay extends Form {
       postedBy: '',
       postedAt: '',
       isApproved: true,
-      isDeleted: false
+      isDeleted: false,
     },
     RcomCard: [],
     liked: false,
@@ -84,27 +84,35 @@ class CardDisplay extends Form {
       const card = await userService.getFavorite();
       data.cards.push(card.data);
       this.setState({ data: data });
+      const found = data.cards[0]?.find((element) => element === this.props.match.params.id);
+      if (found) {
+        this.setState({ liked: true });
+      } else {
+        this.setState({ liked: false });
+      }
     } catch (e) {
       if (e.response && e.response.status === 400) {
         this.setState({ errors: { email: 'Unexpected Error' } });
       }
     }
-    this.setLiked();
   };
 
   toggleChange = (e) => {
-    this.setState({ loaded: false });
+    this.setState({ liked: true });
     e.preventDefault();
     this.doSubmitFav();
   };
 
   doSubmitFav = async () => {
     let { data } = this.state;
-    let updatedCards = await userService.setFavorite(this.props.match.params.id);
-    data.cards[0] = updatedCards.data.cards;
-    this.setState({ data: data });
-    this.setLiked();
-    this.setState({ loaded: true });
+    try {
+      let updatedCards = await userService.setFavorite(this.props.match.params.id);
+      data.cards[0] = updatedCards.data.cards;
+      this.setState({ data: data });
+      this.setLiked();
+    } catch (e) {
+      console.log('Can not do favorite');
+    }
   };
 
   setLiked() {
@@ -112,23 +120,25 @@ class CardDisplay extends Form {
     const found = data.cards[0]?.find((element) => element === this.props.match.params.id);
     if (found) {
       this.setState({ liked: true });
+      toast('Added to your favorites');
     } else {
       this.setState({ liked: false });
+      toast('Remove from your favorites');
     }
   }
 
   doDelete = async (e) => {
     e.preventDefault();
-    let id = e.target.id
-    let {data} = await cardsService.getCardById(id)
-    delete data._id; 
-    delete data.bizNumber; 
-    delete data.user_id; 
+    let id = e.target.id;
+    let { data } = await cardsService.getCardById(id);
+    delete data._id;
+    delete data.bizNumber;
+    delete data.user_id;
     delete data.__v;
     delete data.user;
     data.isDeleted = true;
-    await cardsService.editCard(data,id);
-    data  = await cardsService.getPendingCards();
+    await cardsService.editCard(data, id);
+    data = await cardsService.getPendingCards();
     this.setState({ cards: data });
     toast(`Campaign was declined`);
     this.props.history.replace('/manage');
@@ -136,16 +146,16 @@ class CardDisplay extends Form {
 
   doSubmit = async (e) => {
     e.preventDefault();
-    let id = e.target.id
-    let {data} = await cardsService.getCardById(id)
-    delete data._id; 
-    delete data.bizNumber; 
-    delete data.user_id; 
+    let id = e.target.id;
+    let { data } = await cardsService.getCardById(id);
+    delete data._id;
+    delete data.bizNumber;
+    delete data.user_id;
     delete data.__v;
     delete data.user;
     data.isApproved = true;
-    await cardsService.editCard(data,id);
-    data  = await cardsService.getPendingCards();
+    await cardsService.editCard(data, id);
+    data = await cardsService.getPendingCards();
     this.setState({ cards: data });
     toast(`Campaign was approved`);
     this.props.history.replace('/manage');
@@ -165,7 +175,7 @@ class CardDisplay extends Form {
       boxShadow: '0 16px 38px -12px rgba(0, 0, 0, 0.56),0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
     };
     return (
-      <div className="container mb-4">
+      <div className="container mb-4 animate__animated animate__fadeIn ">
         {!this.state.loaded && <Loader />}
         <div className="row">
           <div className="col-md-9">
@@ -173,30 +183,31 @@ class CardDisplay extends Form {
           </div>
           <div className="col-md-3 text-right mt-5">
             {!this.props.user.ClAdmin && (
-              <span onClick={this.toggleChange} className="faveLink">
-                {!this.state.liked && <i class="far fa-heart"></i>}
-                {this.state.liked && <i class="fas fa-heart"></i>}
-                </span>
+              <span onClick={this.toggleChange}>
+                {!this.state.liked && <img src={require('../../img/favBefore.png')} data-toggle="tooltip" data-placement="top" title="Add cocktail to your favorites" className="faveLink" alt="favorite icon before" />}
+                {this.state.liked && <img src={require('../../img/favAfter.png')} data-toggle="tooltip" data-placement="top" title="Remove cocktail from your favorites" className="faveLink" alt="favorite icon after" />}
+              </span>
             )}
             {this.props.user.ClAdmin && (
-              <div >
-                {!this.state.data.isApproved && <button type="button" onClick={this.doSubmit} id={this.props.match.params.id} className="btn btn-success mr-3">
-                  Approve
-                </button>}
-                <button type="button" onClick={this.doDelete} id={this.props.match.params.id} className="btn btn-danger">
+              <div>
+                {!this.state.data.isApproved && (
+                  <button type="button" onClick={this.doSubmit} id={this.props.match.params.id} className="btn btn-success mr-3 animate__animated animate__fadeIn">
+                    Approve
+                  </button>
+                )}
+                <button type="button" onClick={this.doDelete} id={this.props.match.params.id} className="btn btn-danger animate__animated animate__fadeIn">
                   Decline
                 </button>
               </div>
             )}
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-8">
+
+          <div className="col-md-5">
             {data.postedBy && <h5 className="mt-0 text-muted">Posted By {data.postedBy}</h5>}
             {data.postedAt && <h5 className="mt-0 text-muted">{data.postedAt.toString().replace(/T/, ' ').replace(/\..+/, '')}</h5>}
           </div>
         </div>
-        <div style={mystyle} className=" mt-3"></div>
+        <div style={mystyle} className=" mt-3 animate__animated animate__fadeIn "></div>
         <div className="row ">
           <div className="col-md-12 mt-3">
             <form>
@@ -214,7 +225,7 @@ class CardDisplay extends Form {
                 <div className="col-md-1 "></div>
                 <div className="col-md-8 ">
                   <h3>Description</h3>
-                  <p className="list-group-item list-group-item-action">{data.bizDescription}</p>
+                  <p className="list-group-item list-group-item-action text-content ">{data.bizDescription}</p>
                 </div>
                 <div className="m-3 col-md-12 row card-footer cardFooter_bgc">
                   <p className="col-2">

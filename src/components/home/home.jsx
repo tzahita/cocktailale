@@ -12,7 +12,7 @@ class Home extends Component {
     }
     return (
       <React.Fragment>
-        <div className="">
+        <div className="animate__animated animate__fadeIn">
           <div className="row">
             <div className="home-main col-md-12 col-sm-12">
               <BackgroundVideo></BackgroundVideo>
