@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.dcdaef35.chunk.css",
-    "main.js": "/static/js/main.032597bc.chunk.js",
-    "main.js.map": "/static/js/main.032597bc.chunk.js.map",
+    "main.css": "/static/css/main.85597ebe.chunk.css",
+    "main.js": "/static/js/main.be2aba42.chunk.js",
+    "main.js.map": "/static/js/main.be2aba42.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.3038e589.js",
     "runtime-main.js.map": "/static/js/runtime-main.3038e589.js.map",
     "static/css/2.f19e5a2d.chunk.css": "/static/css/2.f19e5a2d.chunk.css",
     "static/js/2.2a30d5be.chunk.js": "/static/js/2.2a30d5be.chunk.js",
     "static/js/2.2a30d5be.chunk.js.map": "/static/js/2.2a30d5be.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ad227a4f5747408c96c94af4ac8fd93a.js": "/precache-manifest.ad227a4f5747408c96c94af4ac8fd93a.js",
+    "precache-manifest.28c6c73db3b5c4c36164687b2fd6cef3.js": "/precache-manifest.28c6c73db3b5c4c36164687b2fd6cef3.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.f19e5a2d.chunk.css.map": "/static/css/2.f19e5a2d.chunk.css.map",
-    "static/css/main.dcdaef35.chunk.css.map": "/static/css/main.dcdaef35.chunk.css.map",
+    "static/css/main.85597ebe.chunk.css.map": "/static/css/main.85597ebe.chunk.css.map",
     "static/js/2.2a30d5be.chunk.js.LICENSE.txt": "/static/js/2.2a30d5be.chunk.js.LICENSE.txt",
-    "static/media/GetStarted.module.css": "/static/media/Screen Shot 2020-11-12 at 19.35.48.2a65c565.png",
     "static/media/addCard.module.css": "/static/media/cardBGC.8bbb6f61.png",
     "static/media/coverr-cocktail7-0026.mp4": "/static/media/coverr-cocktail7-0026.041a502e.mp4",
     "static/media/all.css": "/static/media/fa-solid-900.ee09ad75.woff",
     "static/media/plus-5-512.png": "/static/media/plus-5-512.31cbf78c.png",
+    "static/media/GetStarted.module.css": "/static/media/signinup_-_no_background.6bf61492.png",
     "static/media/mycards.module.css": "/static/media/undraw_authentication_fsn5.498da19b.svg",
     "static/media/bizsignup.module.css": "/static/media/undraw_business_shop_qw5t.f419a6fe.svg"
   },
@@ -26,7 +26,7 @@
     "static/js/runtime-main.3038e589.js",
     "static/css/2.f19e5a2d.chunk.css",
     "static/js/2.2a30d5be.chunk.js",
-    "static/css/main.dcdaef35.chunk.css",
-    "static/js/main.032597bc.chunk.js"
+    "static/css/main.85597ebe.chunk.css",
+    "static/js/main.be2aba42.chunk.js"
   ]
 }

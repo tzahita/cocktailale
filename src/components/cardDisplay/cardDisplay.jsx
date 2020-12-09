@@ -67,6 +67,7 @@ class CardDisplay extends Form {
     }
   };
 
+  // Return recommended cards
   getCardsRecommendData = async (id = this.props.match.params.id) => {
     try {
       const { data } = await cardService.getCardsRecommend(id);
@@ -78,6 +79,7 @@ class CardDisplay extends Form {
     }
   };
 
+  // Return favorites cards
   getFavorites = async () => {
     const { data } = this.state;
     try {
@@ -97,12 +99,14 @@ class CardDisplay extends Form {
     }
   };
 
+  // toggle favorite
   toggleChange = (e) => {
     this.setState({ liked: true });
     e.preventDefault();
     this.doSubmitFav();
   };
 
+  // Update favorite
   doSubmitFav = async () => {
     let { data } = this.state;
     try {
@@ -115,6 +119,7 @@ class CardDisplay extends Form {
     }
   };
 
+  // Set favorite state
   setLiked() {
     let { data } = this.state;
     const found = data.cards[0]?.find((element) => element === this.props.match.params.id);
@@ -127,6 +132,7 @@ class CardDisplay extends Form {
     }
   }
 
+  // Delete card
   doDelete = async (e) => {
     e.preventDefault();
     let id = e.target.id;
@@ -144,6 +150,7 @@ class CardDisplay extends Form {
     this.props.history.replace('/manage');
   };
 
+  // Update card
   doSubmit = async (e) => {
     e.preventDefault();
     let id = e.target.id;
@@ -246,6 +253,8 @@ class CardDisplay extends Form {
           <div className="row">
             <div className="col-md-12">
               <div className="card-deck">
+                {/* Recommendation score is calculated by amount of likes for a specific cocktail.  */}
+                {/* The displayed cocktail will never be recommended */}
                 {RcomCard.length > 0 &&
                   RcomCard.map((card) => (
                     <Link

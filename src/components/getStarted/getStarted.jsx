@@ -16,8 +16,9 @@ class GetStarted extends Form {
   };
   render() {
     return (
-      <div className="container mt-5 seperator animate__animated animate__fadeIn ">
+      <div className="animate__animated animate__fadeIn">
         <div className={classes.Signin_bgc}>
+      <div className="container mt-5 seperator animate__animated animate__fadeIn ">
           <div className=" row ">
             <div className="col-md-5">
               {!this.state.showSignUp && <Signin location={this.props.location} />}
@@ -38,6 +39,7 @@ class GetStarted extends Form {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

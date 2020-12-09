@@ -1,9 +1,6 @@
 .Signin_bgc {
-  background-image: url('../../img/Screen\ Shot\ 2020-11-12\ at\ 19.35.48.png');
+  background-image: url('../../img/signinup_-_no_background.png');
   /* height: 100hv; */
-  background-position: center bottom;
+  background-position: right bottom;
   background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 1;
-  margin-right: 80px;
 }

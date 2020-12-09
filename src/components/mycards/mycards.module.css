@@ -1,10 +1,25 @@
-.Signin_bgc{
-    background-image: url("../../img/undraw_authentication_fsn5.svg");
-    height: 300px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    opacity: 0.8;
-    margin-right: 80px;
-
+.Signin_bgc {
+  background-image: url('../../img/undraw_authentication_fsn5.svg');
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.8;
+  margin-right: 80px;
+}
+.editorIcon {
+  width: 20%;
+  font-size: 1.6rem;
+  color: var(--nav3);
+}
+.acceptIcon {
+  width: 20%;
+  font-size: 1.5rem;
+  color: green;
+}
+.deleteIcon {
+  width: 20%;
+  font-size: 1.6rem;
+  color: var(--nav4);
+  cursor: pointer;
 }
